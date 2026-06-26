@@ -1,0 +1,64 @@
+/* Extra runtime styles loaded via <link>. Tailwind cannot scope these,
+   so we use plain CSS that complements the design system. */
+
+.dot-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  grid-template-rows: repeat(13, 1fr);
+  gap: 6px;
+  padding: 8%;
+  pointer-events: none;
+}
+.dot-grid .dot {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.55;
+  transform-origin: center;
+}
+
+.draw-svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 420px; height: 420px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, color-mix(in oklab, #ff5a1f 22%, transparent) 0%, transparent 65%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  mix-blend-mode: screen;
+  transition: opacity .3s ease;
+  opacity: 0;
+}
+
+.wa-ping {
+  background: #25D366;
+  opacity: .55;
+  animation: wa-ping 2s cubic-bezier(0,0,0.2,1) infinite;
+}
+@keyframes wa-ping {
+  0%   { transform: scale(1);   opacity: .55; }
+  80%  { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .marquee { animation: none !important; }
+  .cursor-glow { display: none; }
+  .wa-ping { animation: none !important; }
+}
+
+img.lazy-blur { filter: blur(14px); transition: filter .6s ease; }
+img.lazy-blur.is-loaded { filter: blur(0); }
